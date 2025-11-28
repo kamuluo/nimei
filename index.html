@@ -1,722 +1,838 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>极简博客 | 分享生活与思考</title>
+  <!-- 引入外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563eb', // 主色调：蓝色
+            secondary: '#64748b', // 辅助色：深灰色
+            accent: '#f97316', // 强调色：橙色
+            light: '#f8fafc', // 浅色背景
+            dark: '#0f172a', // 深色文本
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            serif: ['Merriweather', 'Georgia', 'serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      }
+    }
+  </style>
+  
+  <style>
+    /* 全局样式 */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    /* 加载动画 */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+<body class="bg-light text-dark antialiased">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/90 backdrop-blur-sm shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16 md:h-20">
+        <!-- 博客Logo -->
+        <a href="#" class="flex items-center space-x-2">
+          <i class="fa fa-pencil-square-o text-primary text-2xl"></i>
+          <span class="font-serif font-bold text-xl md:text-2xl text-dark">极简博客</span>
+        </a>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="#home" class="text-secondary hover:text-primary font-medium transition-colors duration-200">首页</a>
+          <a href="#articles" class="text-secondary hover:text-primary font-medium transition-colors duration-200">文章</a>
+          <a href="#categories" class="text-secondary hover:text-primary font-medium transition-colors duration-200">分类</a>
+          <a href="#about" class="text-secondary hover:text-primary font-medium transition-colors duration-200">关于</a>
+        </nav>
+        
+        <!-- 搜索和移动端菜单按钮 -->
+        <div class="flex items-center space-x-4">
+          <button class="text-secondary hover:text-primary transition-colors duration-200">
+            <i class="fa fa-search text-lg"></i>
+          </button>
+          <button id="menu-toggle" class="md:hidden text-secondary hover:text-primary transition-colors duration-200">
+            <i class="fa fa-bars text-xl"></i>
+          </button>
         </div>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t animate-fade-in">
+      <div class="container mx-auto px-4 py-3 space-y-3">
+        <a href="#home" class="block py-2 text-secondary hover:text-primary font-medium transition-colors duration-200">首页</a>
+        <a href="#articles" class="block py-2 text-secondary hover:text-primary font-medium transition-colors duration-200">文章</a>
+        <a href="#categories" class="block py-2 text-secondary hover:text-primary font-medium transition-colors duration-200">分类</a>
+        <a href="#about" class="block py-2 text-secondary hover:text-primary font-medium transition-colors duration-200">关于</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 英雄区域 -->
+    <section id="home" class="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-b from-white to-blue-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center animate-fade-in">
+          <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-serif font-bold leading-tight text-dark mb-6 text-shadow">
+            分享生活中的<span class="text-primary">思考</span>与<span class="text-accent">发现</span>
+          </h1>
+          <p class="text-lg md:text-xl text-secondary mb-8 leading-relaxed">
+            记录生活点滴，分享知识见解，探索世界美好。在这里，每一篇文章都是一次心灵的旅行。
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="#articles" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+              浏览文章
+            </a>
+            <a href="#about" class="px-6 py-3 bg-white hover:bg-gray-50 text-primary border border-primary font-medium rounded-lg shadow-sm hover:shadow transition-all duration-300 transform hover:-translate-y-1">
+              了解更多
+            </a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+    <!-- 特色文章 -->
+    <section class="py-16 md:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 animate-fade-in">
+          <h2 class="text-2xl md:text-3xl font-serif font-bold mb-3">特色文章</h2>
+          <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
+          <p class="text-secondary max-w-2xl mx-auto">精选优质内容，探索深度思考，开启知识之旅</p>
         </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 特色文章1 -->
+          <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift animate-fade-in delay-100">
+            <a href="#">
+              <img src="https://picsum.photos/id/1033/800/500" alt="大自然的美丽风景" class="w-full h-48 object-cover">
+            </a>
+            <div class="p-6">
+              <div class="flex items-center text-sm text-secondary mb-3">
+                <span class="flex items-center"><i class="fa fa-calendar-o mr-1"></i> 2025-11-15</span>
+                <span class="mx-2">•</span>
+                <span class="flex items-center"><i class="fa fa-folder-o mr-1"></i> 旅行</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3 hover:text-primary transition-colors duration-200">
+                <a href="#">徒步穿越阿尔卑斯山脉的七天七夜</a>
+              </h3>
+              <p class="text-secondary mb-4 line-clamp-3">
+                阿尔卑斯山脉的壮丽景色令人叹为观止，本文记录了我七天徒步穿越的经历，分享路线规划、装备准备和难忘的自然体验。
+              </p>
+              <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                阅读全文 <i class="fa fa-long-arrow-right ml-1"></i>
+              </a>
+            </div>
+          </article>
+          
+          <!-- 特色文章2 -->
+          <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift animate-fade-in delay-200">
+            <a href="#">
+              <img src="https://picsum.photos/id/180/800/500" alt="极简主义生活" class="w-full h-48 object-cover">
+            </a>
+            <div class="p-6">
+              <div class="flex items-center text-sm text-secondary mb-3">
+                <span class="flex items-center"><i class="fa fa-calendar-o mr-1"></i> 2025-11-08</span>
+                <span class="mx-2">•</span>
+                <span class="flex items-center"><i class="fa fa-folder-o mr-1"></i> 生活方式</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3 hover:text-primary transition-colors duration-200">
+                <a href="#">极简主义：如何在喧嚣世界中寻找内心平静</a>
+              </h3>
+              <p class="text-secondary mb-4 line-clamp-3">
+                极简主义不是剥夺，而是回归本质。本文分享了我实践极简生活的三年经验，如何通过减少物质依赖，获得更多心灵自由。
+              </p>
+              <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                阅读全文 <i class="fa fa-long-arrow-right ml-1"></i>
+              </a>
+            </div>
+          </article>
+          
+          <!-- 特色文章3 -->
+          <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift animate-fade-in delay-300">
+            <a href="#">
+              <img src="https://picsum.photos/id/48/800/500" alt="编程学习" class="w-full h-48 object-cover">
+            </a>
+            <div class="p-6">
+              <div class="flex items-center text-sm text-secondary mb-3">
+                <span class="flex items-center"><i class="fa fa-calendar-o mr-1"></i> 2025-11-01</span>
+                <span class="mx-2">•</span>
+                <span class="flex items-center"><i class="fa fa-folder-o mr-1"></i> 技术</span>
+              </div>
+              <h3 class="text-xl font-bold mb-3 hover:text-primary transition-colors duration-200">
+                <a href="#">从零基础到全栈开发：我的五年编程之路</a>
+              </h3>
+              <p class="text-secondary mb-4 line-clamp-3">
+                非科班出身如何转行编程？本文详细记录了我的学习路径、资源推荐和职业发展，希望能给正在迷茫的你一些启发。
+              </p>
+              <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                阅读全文 <i class="fa fa-long-arrow-right ml-1"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+    <!-- 文章列表 -->
+    <section id="articles" class="py-16 md:py-24 bg-gray-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 animate-fade-in">
+          <h2 class="text-2xl md:text-3xl font-serif font-bold mb-3">最新文章</h2>
+          <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
+          <p class="text-secondary max-w-2xl mx-auto">持续更新的思考与分享，与你一同成长</p>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- 文章列表主区域 -->
+          <div class="lg:col-span-2 space-y-8">
+            <!-- 文章1 -->
+            <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift animate-fade-in">
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <a href="#">
+                    <img src="https://picsum.photos/id/20/600/400" alt="晨间习惯" class="w-full h-48 md:h-full object-cover">
+                  </a>
+                </div>
+                <div class="p-6 md:w-2/3">
+                  <div class="flex items-center text-sm text-secondary mb-3">
+                    <span class="flex items-center"><i class="fa fa-calendar-o mr-1"></i> 2025-10-28</span>
+                    <span class="mx-2">•</span>
+                    <span class="flex items-center"><i class="fa fa-folder-o mr-1"></i> 自我提升</span>
+                  </div>
+                  <h3 class="text-xl font-bold mb-3 hover:text-primary transition-colors duration-200">
+                    <a href="#">打造高效晨间 routine：改变我生活的6个习惯</a>
+                  </h3>
+                  <p class="text-secondary mb-4 line-clamp-2">
+                    早起的奇迹不在于早起本身，而在于如何利用这段黄金时间。本文分享了我坚持两年的晨间习惯，帮助我提升效率、保持专注并实现目标。
+                  </p>
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                      阅读全文 <i class="fa fa-long-arrow-right ml-1"></i>
+                    </a>
+                    <div class="flex items-center text-sm text-secondary">
+                      <span class="flex items-center mr-4"><i class="fa fa-eye mr-1"></i> 1.2k</span>
+                      <span class="flex items-center"><i class="fa fa-comment-o mr-1"></i> 32</span>
                     </div>
+                  </div>
                 </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
+              </div>
+            </article>
             
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+            <!-- 文章2 -->
+            <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift animate-fade-in delay-100">
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <a href="#">
+                    <img src="https://picsum.photos/id/26/600/400" alt="书籍推荐" class="w-full h-48 md:h-full object-cover">
+                  </a>
+                </div>
+                <div class="p-6 md:w-2/3">
+                  <div class="flex items-center text-sm text-secondary mb-3">
+                    <span class="flex items-center"><i class="fa fa-calendar-o mr-1"></i> 2025-10-22</span>
+                    <span class="mx-2">•</span>
+                    <span class="flex items-center"><i class="fa fa-folder-o mr-1"></i> 阅读</span>
+                  </div>
+                  <h3 class="text-xl font-bold mb-3 hover:text-primary transition-colors duration-200">
+                    <a href="#">改变认知的10本书：重塑我的思维方式</a>
+                  </h3>
+                  <p class="text-secondary mb-4 line-clamp-2">
+                    阅读是最低成本的自我投资。这10本书涵盖了心理学、哲学、经济学等多个领域，每一本都深刻影响了我的思考方式和生活态度。
+                  </p>
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                      阅读全文 <i class="fa fa-long-arrow-right ml-1"></i>
+                    </a>
+                    <div class="flex items-center text-sm text-secondary">
+                      <span class="flex items-center mr-4"><i class="fa fa-eye mr-1"></i> 1.8k</span>
+                      <span class="flex items-center"><i class="fa fa-comment-o mr-1"></i> 47</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            
+            <!-- 文章3 -->
+            <article class="bg-white rounded-xl overflow-hidden shadow-md hover-lift animate-fade-in delay-200">
+              <div class="md:flex">
+                <div class="md:w-1/3">
+                  <a href="#">
+                    <img src="https://picsum.photos/id/96/600/400" alt="远程工作" class="w-full h-48 md:h-full object-cover">
+                  </a>
+                </div>
+                <div class="p-6 md:w-2/3">
+                  <div class="flex items-center text-sm text-secondary mb-3">
+                    <span class="flex items-center"><i class="fa fa-calendar-o mr-1"></i> 2025-10-15</span>
+                    <span class="mx-2">•</span>
+                    <span class="flex items-center"><i class="fa fa-folder-o mr-1"></i> 职场</span>
+                  </div>
+                  <h3 class="text-xl font-bold mb-3 hover:text-primary transition-colors duration-200">
+                    <a href="#">远程工作三年：如何保持高效与工作生活平衡</a>
+                  </h3>
+                  <p class="text-secondary mb-4 line-clamp-2">
+                    远程工作给了我自由，但也带来了挑战。本文分享了我保持高效产出、避免 burnout 以及维持工作生活平衡的实用技巧。
+                  </p>
+                  <div class="flex justify-between items-center">
+                    <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                      阅读全文 <i class="fa fa-long-arrow-right ml-1"></i>
+                    </a>
+                    <div class="flex items-center text-sm text-secondary">
+                      <span class="flex items-center mr-4"><i class="fa fa-eye mr-1"></i> 2.3k</span>
+                      <span class="flex items-center"><i class="fa fa-comment-o mr-1"></i> 58</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+            
+            <!-- 分页 -->
+            <div class="flex justify-center pt-4">
+              <nav class="inline-flex rounded-md shadow-sm" aria-label="Pagination">
+                <a href="#" class="px-3 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-secondary hover:bg-gray-50">
+                  <i class="fa fa-chevron-left"></i>
+                </a>
+                <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-primary text-sm font-medium text-white">1</a>
+                <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-secondary hover:bg-gray-50">2</a>
+                <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-secondary hover:bg-gray-50">3</a>
+                <span class="px-4 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-secondary">...</span>
+                <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-white text-sm font-medium text-secondary hover:bg-gray-50">8</a>
+                <a href="#" class="px-3 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-secondary hover:bg-gray-50">
+                  <i class="fa fa-chevron-right"></i>
+                </a>
+              </nav>
+            </div>
+          </div>
+          
+          <!-- 侧边栏 -->
+          <div class="space-y-8">
+            <!-- 作者信息 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md p-6 animate-fade-in">
+              <div class="flex flex-col items-center text-center">
+                <img src="https://picsum.photos/id/64/200/200" alt="作者头像" class="w-24 h-24 rounded-full object-cover border-4 border-primary/20 mb-4">
+                <h3 class="text-xl font-bold mb-2">李明</h3>
+                <p class="text-secondary mb-4">自由撰稿人 | 旅行爱好者 | 技术探索者</p>
+                <p class="text-sm text-secondary mb-6">
+                  热衷于分享生活中的思考与发现，希望通过文字传递价值，与读者共同成长。
+                </p>
+                <div class="flex space-x-4">
+                  <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors duration-300">
+                    <i class="fa fa-weibo"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors duration-300">
+                    <i class="fa fa-wechat"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors duration-300">
+                    <i class="fa fa-github"></i>
+                  </a>
+                  <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors duration-300">
+                    <i class="fa fa-linkedin"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 分类 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md p-6 animate-fade-in delay-100">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fa fa-folder-open-o text-primary mr-2"></i> 文章分类
+              </h3>
+              <ul class="space-y-3">
+                <li>
+                  <a href="#" class="flex justify-between items-center group">
+                    <span class="text-secondary group-hover:text-primary transition-colors duration-200">旅行</span>
+                    <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">24</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex justify-between items-center group">
+                    <span class="text-secondary group-hover:text-primary transition-colors duration-200">生活方式</span>
+                    <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">18</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex justify-between items-center group">
+                    <span class="text-secondary group-hover:text-primary transition-colors duration-200">技术</span>
+                    <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">32</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex justify-between items-center group">
+                    <span class="text-secondary group-hover:text-primary transition-colors duration-200">自我提升</span>
+                    <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">15</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex justify-between items-center group">
+                    <span class="text-secondary group-hover:text-primary transition-colors duration-200">阅读</span>
+                    <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">9</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex justify-between items-center group">
+                    <span class="text-secondary group-hover:text-primary transition-colors duration-200">职场</span>
+                    <span class="bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">12</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            
+            <!-- 热门标签 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md p-6 animate-fade-in delay-200">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fa fa-tags text-primary mr-2"></i> 热门标签
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <a href="#" class="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">极简主义</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">编程</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">旅行</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">阅读</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">效率</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">远程工作</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">心理学</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">摄影</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">美食</a>
+                <a href="#" class="px-3 py-1 bg-gray-100 text-secondary text-sm rounded-full hover:bg-primary hover:text-white transition-colors duration-200">电影</a>
+              </div>
+            </div>
+            
+            <!-- 阅读统计 -->
+            <div class="bg-white rounded-xl overflow-hidden shadow-md p-6 animate-fade-in delay-300">
+              <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fa fa-bar-chart text-primary mr-2"></i> 阅读统计
+              </h3>
+              <div>
+                <canvas id="readingChart" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 分类展示 -->
+    <section id="categories" class="py-16 md:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 animate-fade-in">
+          <h2 class="text-2xl md:text-3xl font-serif font-bold mb-3">文章分类</h2>
+          <div class="w-20 h-1 bg-primary mx-auto mb-4"></div>
+          <p class="text-secondary max-w-2xl mx-auto">探索不同领域的思考与分享，找到你感兴趣的内容</p>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- 分类1 -->
+          <a href="#" class="group animate-fade-in">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift h-full">
+              <div class="h-48 overflow-hidden">
+                <img src="https://picsum.photos/id/10/600/400" alt="旅行" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+              </div>
+              <div class="p-6">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+                  <i class="fa fa-map-marker text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-200">旅行</h3>
+                <p class="text-secondary mb-4">24 篇文章</p>
+                <p class="text-sm text-secondary mb-4 line-clamp-2">
+                  探索世界各地的风景与文化，记录旅途的美好与感悟
+                </p>
+                <span class="inline-flex items-center text-primary font-medium text-sm group-hover:underline">
+                  浏览文章 <i class="fa fa-arrow-right ml-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+          
+          <!-- 分类2 -->
+          <a href="#" class="group animate-fade-in delay-100">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift h-full">
+              <div class="h-48 overflow-hidden">
+                <img src="https://picsum.photos/id/28/600/400" alt="生活方式" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+              </div>
+              <div class="p-6">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+                  <i class="fa fa-coffee text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-200">生活方式</h3>
+                <p class="text-secondary mb-4">18 篇文章</p>
+                <p class="text-sm text-secondary mb-4 line-clamp-2">
+                  分享极简主义、健康生活、时间管理等提升生活品质的内容
+                </p>
+                <span class="inline-flex items-center text-primary font-medium text-sm group-hover:underline">
+                  浏览文章 <i class="fa fa-arrow-right ml-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+          
+          <!-- 分类3 -->
+          <a href="#" class="group animate-fade-in delay-200">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift h-full">
+              <div class="h-48 overflow-hidden">
+                <img src="https://picsum.photos/id/42/600/400" alt="技术" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+              </div>
+              <div class="p-6">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+                  <i class="fa fa-code text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-200">技术</h3>
+                <p class="text-secondary mb-4">32 篇文章</p>
+                <p class="text-sm text-secondary mb-4 line-clamp-2">
+                  编程学习、技术趋势、工具推荐，分享技术成长之路
+                </p>
+                <span class="inline-flex items-center text-primary font-medium text-sm group-hover:underline">
+                  浏览文章 <i class="fa fa-arrow-right ml-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+          
+          <!-- 分类4 -->
+          <a href="#" class="group animate-fade-in delay-300">
+            <div class="bg-white rounded-xl overflow-hidden shadow-md hover-lift h-full">
+              <div class="h-48 overflow-hidden">
+                <img src="https://picsum.photos/id/24/600/400" alt="阅读" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+              </div>
+              <div class="p-6">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+                  <i class="fa fa-book text-xl"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-200">阅读</h3>
+                <p class="text-secondary mb-4">9 篇文章</p>
+                <p class="text-sm text-secondary mb-4 line-clamp-2">
+                  书籍推荐、读书笔记、阅读方法，通过阅读拓展认知边界
+                </p>
+                <span class="inline-flex items-center text-primary font-medium text-sm group-hover:underline">
+                  浏览文章 <i class="fa fa-arrow-right ml-1 transition-transform duration-300 group-hover:translate-x-1"></i>
+                </span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 订阅区域 -->
+    <section class="py-16 md:py-24 bg-primary/5">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-8 md:p-12 relative overflow-hidden animate-fade-in">
+          <!-- 装饰元素 -->
+          <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full"></div>
+          <div class="absolute -bottom-16 -left-16 w-64 h-64 bg-accent/10 rounded-full"></div>
+          
+          <div class="relative z-10 text-center">
+            <h2 class="text-2xl md:text-3xl font-serif font-bold mb-4">订阅我的博客</h2>
+            <p class="text-secondary mb-8">
+              每周收到最新文章推送，不错过任何有价值的思考与分享
+            </p>
+            <form class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
+              <input 
+                type="email" 
+                placeholder="输入你的邮箱地址" 
+                class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200"
+                required
+              >
+              <button type="submit" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 whitespace-nowrap">
+                立即订阅
+              </button>
+            </form>
+            <p class="text-xs text-secondary mt-4">
+              我们尊重你的隐私，不会向第三方分享你的信息
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关于博主 -->
+    <section id="about" class="py-16 md:py-24">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="animate-fade-in">
+            <img src="https://picsum.photos/id/1076/800/600" alt="博主照片" class="w-full h-auto rounded-xl shadow-lg">
+          </div>
+          <div class="animate-fade-in delay-100">
+            <h2 class="text-2xl md:text-3xl font-serif font-bold mb-4">关于我</h2>
+            <div class="w-20 h-1 bg-primary mb-6"></div>
+            <p class="text-secondary mb-6 leading-relaxed">
+              你好！我是李明，一名自由撰稿人、旅行爱好者和技术探索者。我相信生活的本质在于体验与成长，而写作是最好的思考方式。
+            </p>
+            <p class="text-secondary mb-6 leading-relaxed">
+              这个博客始于2022年，最初只是为了记录自己的思考和经历。随着时间的推移，它逐渐成为了我与世界交流的窗口，也吸引了许多志同道合的朋友。
+            </p>
+            <p class="text-secondary mb-8 leading-relaxed">
+              在这里，你会发现关于旅行、生活方式、技术、阅读等多个领域的内容。我希望通过这些文章，能够给你带来一些启发和价值，与你一同成长。
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#" class="inline-flex items-center px-5 py-2.5 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                <i class="fa fa-envelope-o mr-2"></i> 联系我
+              </a>
+              <a href="#" class="inline-flex items-center px-5 py-2.5 bg-white hover:bg-gray-50 text-primary border border-primary font-medium rounded-lg shadow-sm hover:shadow transition-all duration-300">
+                <i class="fa fa-github mr-2"></i> 访问我的GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <!-- 博客信息 -->
+        <div>
+          <div class="flex items-center space-x-2 mb-6">
+            <i class="fa fa-pencil-square-o text-primary text-2xl"></i>
+            <span class="font-serif font-bold text-xl text-white">极简博客</span>
+          </div>
+          <p class="text-gray-400 mb-6">
+            分享生活中的思考与发现，与你一同成长。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors duration-300">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors duration-300">
+              <i class="fa fa-wechat"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors duration-300">
+              <i class="fa fa-github"></i>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors duration-300">
+              <i class="fa fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+        
+        <!-- 快速链接 -->
+        <div>
+          <h3 class="text-lg font-bold mb-6">快速链接</h3>
+          <ul class="space-y-3">
+            <li><a href="#home" class="text-gray-400 hover:text-white transition-colors duration-200">首页</a></li>
+            <li><a href="#articles" class="text-gray-400 hover:text-white transition-colors duration-200">最新文章</a></li>
+            <li><a href="#categories" class="text-gray-400 hover:text-white transition-colors duration-200">文章分类</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-white transition-colors duration-200">关于我</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">隐私政策</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">使用条款</a></li>
+          </ul>
+        </div>
+        
+        <!-- 热门分类 -->
+        <div>
+          <h3 class="text-lg font-bold mb-6">热门分类</h3>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">旅行 (24)</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">生活方式 (18)</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">技术 (32)</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">自我提升 (15)</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">阅读 (9)</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">职场 (12)</a></li>
+          </ul>
+        </div>
+        
+        <!-- 联系信息 -->
+        <div>
+          <h3 class="text-lg font-bold mb-6">联系我</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fa fa-envelope-o text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">contact@jijianblog.com</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-map-marker text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">北京市朝阳区建国路88号</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-phone text-primary mt-1 mr-3"></i>
+              <span class="text-gray-400">+86 138 1234 5678</span>
+            </li>
+          </ul>
+          <div class="mt-6">
+            <h4 class="text-sm font-medium mb-3 text-gray-300">订阅更新</h4>
+            <form class="flex">
+              <input 
+                type="email" 
+                placeholder="你的邮箱" 
+                class="flex-1 px-3 py-2 rounded-l-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-primary"
+              >
+              <button type="submit" class="px-3 py-2 bg-primary hover:bg-primary/90 text-white rounded-r-lg transition-colors duration-200">
+                <i class="fa fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-white/10 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 text-sm mb-4 md:mb-0">
+            &copy; 2025 极简博客. 保留所有权利.
+          </p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-200">隐私政策</a>
+            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-200">使用条款</a>
+            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors duration-200">Cookie 政策</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮 -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-primary/90">
+    <i class="fa fa-chevron-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('shadow-md');
+        navbar.classList.remove('shadow-sm');
+      } else {
+        navbar.classList.remove('shadow-md');
+        navbar.classList.add('shadow-sm');
+      }
+    });
+    
+    // 回到顶部按钮
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.add('opacity-0', 'invisible');
+        backToTopButton.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // 阅读统计图表
+    window.addEventListener('load', () => {
+      const ctx = document.getElementById('readingChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+          datasets: [{
+            label: '阅读量',
+            data: [1200, 1900, 1600, 2400, 2800, 3200],
+            borderColor: '#2563eb',
+            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                display: true,
+                color: 'rgba(0, 0, 0, 0.05)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              }
+            }
+          }
         }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+      });
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          // 关闭移动端菜单
+          if (!mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+          
+          // 滚动到目标位置
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  </script>
 </body>
-
 </html>
