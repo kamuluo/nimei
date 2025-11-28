@@ -54,8 +54,12 @@ function getRandomArray(array) {
   const randomIndex = Math.floor(Math.random() * array.length);
   return array[randomIndex];
 }
-```
+```例如
+huggingface
 
+FROM ghcr.io/kamuluo/wochao:latest
+
+ENV DOMAIN=kamuken88-wochao.hf.space
 
 ## 开源协议说明（基于GPL）
 
