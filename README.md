@@ -54,12 +54,6 @@ function getRandomArray(array) {
   const randomIndex = Math.floor(Math.random() * array.length);
   return array[randomIndex];
 }
-```例如
-huggingface
-
-FROM ghcr.io/kamuluo/wochao:latest
-
-ENV DOMAIN=kamuken88-wochao.hf.space
 
 ## 开源协议说明（基于GPL）
 
@@ -73,7 +67,14 @@ ENV DOMAIN=kamuken88-wochao.hf.space
 - 将本项目嵌入到出售的软件、系统或服务中；
 - 通过本项目直接或间接获利（例如通过广告、SaaS服务等）；
 - 在公司或组织内部作为商业工具使用。
+```例如
+创建名为Dockerfile的文件，格式如下：
+FROM ghcr.io/github用户名/镜像名:latest
 
+ENV DOMAIN=你的space域名或反代后的域名
+huggingface
+FROM ghcr.io/kamuluo/wochao:latest
+ENV DOMAIN=kamuken88-wochao.hf.space
 如需获得商业授权，请联系原作者：[admin@eooce.com]
 
 版权所有 ©2025 `eooce`
